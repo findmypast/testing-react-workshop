@@ -12,7 +12,7 @@ Teams like Oblivion, Puzzlers & T-Rex are already using React, and in the future
 ##Learning topics
 
 ###node/npm
-npm commands: `npm install' and 'npm test`, plus the use of **package.json** script hooks (*publish*, etc.) in conjunction with the *repository* field.
+npm commands: `npm install` and `npm test`, plus the use of **package.json** script hooks (*publish*, etc.) in conjunction with the *repository* field.
 
 ###Mocha
 
