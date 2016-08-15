@@ -7,7 +7,7 @@ It's a testing utility to assert, manipulate and read the rendered React compone
 **Why use it?**
 
 * Keeps the code base clean and reduced boiler code
-* Tests are less flaky
+* Rendering components becomes stable
 * Provides an easy to use API to assert on the rendered component e.g `dom.find('.element')`
 
 ## What our code looked like before Enzyme
@@ -61,3 +61,7 @@ describe('User profile', () => {
   });
 });
 ```
+
+There is no need for the `before` so we render the component in the `it` and assert the user name is there.
+
+Far less lines and the tests become more readable because of less flaky code to setup component.
