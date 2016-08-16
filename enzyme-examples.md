@@ -1,4 +1,4 @@
-# Using Enzyme to help test your React components
+# Using Enzyme to test React components
 
 **What is Enzyme?**
 
@@ -7,14 +7,14 @@ It's a testing utility to assert, manipulate and read the rendered React compone
 **Why use it?**
 
 * Keeps the code base clean and reduced boiler code
-* Rendering components becomes stable
-* Provides an easy to use API to assert on the rendered component e.g `dom.find('.element')`
+* Stable rendering of components
+* Easy to use API to assert on the rendered component e.g `dom.find('.element')`
 
 ## What our code looked like before Enzyme
 
-Below is **one** test of asserting the user name exists in the `ProfileBox` component.
+Below is **one** test asserting the user name exists in the `ProfileBox` component.
 
-In the `before` the component is rendered to the dom. The `setTimeout` is used to force the before to wait helping to ensure the component is mounted. (bit of a hack.)
+In the `before` the component is rendered to the dom (using jsdom). The `setTimeout` is used to force the before to wait to ensure the component is mounted. (bit of a hack.)
 
 In the `after` the component is removed for clean up.
 
@@ -40,7 +40,7 @@ describe('User profile', () => {
     setTimeout(done);
   });
 
-  it('should have name', () => {
+  it('should contain name', () => {
     dom.textContent.should.containEql('Richard Kotze');
   });
 });
@@ -55,13 +55,23 @@ import { mount } from 'enzyme';
 describe('User profile', () => {
 	const person = { FirstName:'Richard', LastName:'Kotze' };
 
-  it('should have name', () => {
+  it('should contain name', () => {
     const profileDom = mount(<ProfileBox hint={person} />);
     profileDom.text().should.containEql('Richard Kotze');
   });
 });
 ```
 
-There is no need for the `before` so we render the component in the `it` and assert the user name is there.
+As you can see far less lines making it more focused and readable.  The test is more reliable because in the first example the hack creates flaky tests.
 
-Far less lines and the tests become more readable because of less flaky code to setup component.
+There is no need for the `before` so we render the component in the `it`. The component can be rendered in the `before` and assert different features inside. 
+
+## Enzyme API
+
+[Enzyme Guide](http://airbnb.io/enzyme/)
+
+Enzyme provides three ways to render your components.
+
+- **Shallow:** Testing the component as a unit and not asserting on child components 
+- **Full:** Full dom rendering when interacting with DOM apis or components that use lifecycle methods. (Needs jsdom)
+- **Static:** Render React components to static HTML and analyse the HTML stucture. Traverse using the [Cheerio](http://cheerio.js.org/) library.
