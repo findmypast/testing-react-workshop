@@ -84,6 +84,18 @@ Full dom rendering when interacting with DOM apis or components that use lifecyc
 
 Render React components to static HTML and analyse the HTML stucture using the [Cheerio](http://cheerio.js.org/) library. (jsdom or browser **not** needed)
 
-## Common enzyme examples
+## Common Enzyme examples
 
-Will use shouldjs to show assert examples.
+In the examples below a should assert library is used in the examples. There is [shouldJS](https://shouldjs.github.io/) and [Chai](http://chaijs.com/). Should helps to make the asserts more readable and focused.
+
+You will most likely use the `find` method which traverse through the dom using **css selectors** to get elements.
+
+Example below renders a component containing a list and the `find` method is used to get the list items then assert the total items.
+
+```javascript
+const dom = shallow(<ExampleComponent />);
+
+const exampleList = dom.find('.exampleList li');
+
+exampleList.length.should.equal(3);
+```
