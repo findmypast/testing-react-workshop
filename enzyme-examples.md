@@ -72,15 +72,15 @@ There is no need for the `before` so we render the component in the `it`. The co
 
 Enzyme provides three ways to render your components.
 
-**Shallow: `shallow(component)`** 
+**Shallow: `shallow(<component />)`** 
 
 Testing the component as a unit and not asserting on child components. (jsdom or browser **not** needed)
 
-**Full:** 
+**Full: `mount(<component />)`** 
 
 Full dom rendering when interacting with DOM apis or components that use lifecycle methods. (**Needs** jsdom or browser envrionment)
 
-- **Static:** 
+**Static: `render(<component />)`** 
 
 Render React components to static HTML and analyse the HTML stucture using the [Cheerio](http://cheerio.js.org/) library. (jsdom or browser **not** needed)
 
