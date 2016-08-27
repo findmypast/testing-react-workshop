@@ -86,9 +86,9 @@ Render React components to static HTML and analyse the HTML stucture using the [
 
 ## Common Enzyme examples
 
-In the examples below a should assert library is used in the examples. There is [shouldJS](https://shouldjs.github.io/) and [Chai](http://chaijs.com/). Should helps to make the asserts more readable and focused.
+In the examples below are commonly used Enzyme methods to help get you started. The assert library being used is [shouldJS](https://shouldjs.github.io/) and [Chai](http://chaijs.com/). This will help make the asserts more readable and focused.
 
-You will most likely use the `find` method which traverse through the dom using **css selectors** to get elements.
+You will most likely use the `find` method which traverse through the dom using **css selectors** to get elements like jQuery.
 
 Example below renders a component containing a list and the `find` method is used to get the list items then assert the total items.
 
@@ -99,3 +99,43 @@ const exampleList = dom.find('.exampleList li');
 
 exampleList.length.should.equal(3);
 ```
+
+`get(index)` returns a node (`ReactElement`) giving access to DOM methods like `getAttribute`.
+
+`at(index)` returns an enzyme wrapper.
+
+While the difference is subtle the `get` method is useful to check the rendered markup.
+
+```javascript
+const dom = shallow(<ExampleComponent />);
+
+const exampleList = dom.find('.exampleList li');
+
+exampleList.get(0).getAttribute('class').should.equal('special');
+```
+
+To access the state and prop object Enzyme exposes `state([key])`, `prop([key])` and `props()`.
+
+```javascript
+const dom = mount(<ExampleComponent profileId="123" />);
+
+const exampleList = dom.find('.exampleProfile');
+
+dom.state('name').should.equal('Richard');
+dom.prop('profileId').should.equal(123);
+```
+
+To simulate an event like `onChange`, use the `simulate(event[, mockData])` method.
+
+```javascript
+const dom = mount(<ExampleComponent />);
+
+const exampleList = dom.find('.exampleList .userName');
+
+dom.state('userName').should.equal('typo.doe');
+
+exampleList.simulate('change', { target: { value: 'john.doe'}});
+
+dom.state('userName').should.equal('john.doe');
+```
+
