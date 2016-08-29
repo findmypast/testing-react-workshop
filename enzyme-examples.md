@@ -14,9 +14,11 @@ It's a testing utility to assert, manipulate and read the rendered React compone
 
 Below is **one** test asserting the user name exists in the `ProfileBox` component.
 
-In the `before` the component is rendered to the dom (using jsdom). The `setTimeout` is used to force the before to wait to ensure the component is mounted. (bit of a hack.)
+In the `before` function a component is rendered to the dom (using [jsdom](https://github.com/tmpvar/jsdom)). The `setTimeout` is used to wait 20ms, allowing extra time for the component to mounted. (this is a hack.)
 
-In the `after` the component is removed for clean up.
+In the `after` the component is removed for clean up and a `setTimeout` is used for similar reasons as mentioned before.
+
+`findDOMNode` is used to get the rendered component from the DOM, allowing access to stand DOM API which can be used to assert on as shown in the `it`.
 
 ```JavaScript
 describe('User profile', () => {
@@ -46,7 +48,7 @@ describe('User profile', () => {
 });
 ```
 
-## Now using Enzyme
+## Using Enzyme
 
 The same example as above but using Enzyme;
 
@@ -62,9 +64,9 @@ describe('User profile', () => {
 });
 ```
 
-As you can see far less lines making it more focused and readable.  The test is more reliable because in the first example the hack creates flaky tests.
+As is can be seen far less lines of code are written, making it more focused and readable. The test is more reliable because in the first example the hack creates flaky tests.
 
-There is no need for the `before` so we render the component in the `it`. The component can be rendered in the `before` and assert different features inside. 
+There is no need for the `before` so we render the component in the `it`. The component can be rendered in the `before` if needed. 
 
 ## Enzyme API
 
@@ -78,7 +80,7 @@ Testing the component as a unit and not asserting on child components. (jsdom or
 
 **Full: `mount(<component />)`** 
 
-Full dom rendering when interacting with DOM apis or components that use lifecycle methods. (**Needs** jsdom or browser envrionment)
+Full dom rendering when interacting with DOM APIs or components that use lifecycle methods. (**Needs** jsdom or browser envrionment)
 
 **Static: `render(<component />)`** 
 
@@ -88,9 +90,9 @@ Render React components to static HTML and analyse the HTML stucture using the [
 
 In the examples below are commonly used Enzyme methods to help get you started. The assert library being used is [shouldJS](https://shouldjs.github.io/) and [Chai](http://chaijs.com/). This will help make the asserts more readable and focused.
 
-You will most likely use the `find` method which traverse through the dom using **css selectors** to get elements like jQuery.
+You will most likely use the `find` method which traverse through the DOM using **css selectors** to get elements like jQuery.
 
-Example below renders a component containing a list and the `find` method is used to get the list items then assert the total items.
+Below renders a component containing a list and the `find` method is used to get the list items to assert the total.
 
 ```javascript
 const dom = shallow(<ExampleComponent />);
@@ -106,6 +108,8 @@ exampleList.length.should.equal(3);
 
 While the difference is subtle the `get` method is useful to check the rendered markup.
 
+Below the first list item is found and checks for a css class.
+
 ```javascript
 const dom = shallow(<ExampleComponent />);
 
@@ -114,7 +118,9 @@ const exampleList = dom.find('.exampleList li');
 exampleList.get(0).getAttribute('class').should.equal('special');
 ```
 
-To access the state and prop object Enzyme exposes `state([key])`, `prop([key])` and `props()`.
+To access the state and prop objects in a React component Enzyme exposes `state([key])`, `prop([key])` and `props()`.
+
+Below the component takes a `profileId` to get a user profile. Assert the profileId is correct on the props and the expected user name set in the state.
 
 ```javascript
 const dom = mount(<ExampleComponent profileId="123" />);
@@ -126,6 +132,8 @@ dom.prop('profileId').should.equal(123);
 ```
 
 To simulate an event like `onChange`, use the `simulate(event[, mockData])` method.
+
+In React the `onChange` event needs to be fired to update the state of an input value. Below that event is fired with a mock value. Below the test asserts the value has changed.
 
 ```javascript
 const dom = mount(<ExampleComponent />);
@@ -139,3 +147,4 @@ exampleList.simulate('change', { target: { value: 'john.doe'}});
 dom.state('userName').should.equal('john.doe');
 ```
 
+Enzyme JS is a useful tool for testing React components enabling developer to build tests efficiently. I would encourage all React app development to use this library.
