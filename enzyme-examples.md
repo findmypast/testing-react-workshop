@@ -2,23 +2,23 @@
 
 **What is Enzyme?**
 
-It's a testing utility to assert, manipulate and read the rendered React component.
+It's a testing utility to assert, manipulate and read rendered React component.
 
 **Why use it?**
 
 * Keeps the code base clean and reduced boiler code
 * Stable rendering of components
-* Easy to use API to assert on the rendered component e.g `dom.find('.element')`
+* Easy to use API to assert on rendered components e.g `dom.find('.element')`
 
 ## What our code looked like before Enzyme
 
 Below is **one** test asserting the user name exists in the `ProfileBox` component.
 
-In the `before` function a component is rendered to the dom (using [jsdom](https://github.com/tmpvar/jsdom)). The `setTimeout` is used to wait 20ms, allowing extra time for the component to mounted. (this is a hack.)
+In the `before` function a component is rendered to the dom (using [jsdom](https://github.com/tmpvar/jsdom)). The `setTimeout` is used to wait 20ms, allowing extra time for the component to mount. (this is a hack.)
 
-In the `after` the component is removed for clean up and a `setTimeout` is used for similar reasons as mentioned before.
+In the `after` the component is removed for clean up and a `setTimeout` is used for similar reasons as mentioned previously.
 
-`findDOMNode` is used to get the rendered component from the DOM, allowing access to stand DOM API which can be used to assert on as shown in the `it`.
+`findDOMNode` method is used to get the rendered component from the DOM, allowing access to stand DOM API which can be used to assert on as shown in the `it`.
 
 ```JavaScript
 describe('User profile', () => {
@@ -50,7 +50,7 @@ describe('User profile', () => {
 
 ## Using Enzyme
 
-The same example as above but using Enzyme;
+The same example as above but using Enzyme.
 
 ```JavaScript
 import { mount } from 'enzyme';
@@ -66,7 +66,7 @@ describe('User profile', () => {
 
 As is can be seen far less lines of code are written, making it more focused and readable. The test is more reliable because in the first example the hack creates flaky tests.
 
-There is no need for the `before` so we render the component in the `it`. The component can be rendered in the `before` if needed. 
+There is no need for the `before` so we render the component in the `it`, but the component can be rendered in the `before` if needed. 
 
 ## Enzyme API
 
@@ -80,7 +80,7 @@ Testing the component as a unit and not asserting on child components. (jsdom or
 
 **Full: `mount(<component />)`** 
 
-Full dom rendering when interacting with DOM APIs or components that use lifecycle methods. (**Needs** jsdom or browser envrionment)
+Full DOM rendering when interacting with DOM APIs or components that use lifecycle methods. (**Needs** jsdom or browser envrionment)
 
 **Static: `render(<component />)`** 
 
@@ -88,9 +88,9 @@ Render React components to static HTML and analyse the HTML stucture using the [
 
 ## Common Enzyme examples
 
-In the examples below are commonly used Enzyme methods to help get you started. The assert library being used is [shouldJS](https://shouldjs.github.io/) and [Chai](http://chaijs.com/). This will help make the asserts more readable and focused.
+In the examples below are commonly used Enzyme methods to help get started. The assert library used is [shouldJS](https://shouldjs.github.io/), the [Chai](http://chaijs.com/) can also be used. I find "should" helps make the asserts more readable and focused.
 
-You will most likely use the `find` method which traverse through the DOM using **css selectors** to get elements like jQuery.
+The `find` method will probably be used in every test and is used to traverse through the DOM using **css selectors** to get elements, similar to jQuery. This returns an Enzyme wrapper.
 
 Below renders a component containing a list and the `find` method is used to get the list items to assert the total.
 
@@ -104,7 +104,7 @@ exampleList.length.should.equal(3);
 
 `get(index)` returns a node (`ReactElement`) giving access to DOM methods like `getAttribute`.
 
-`at(index)` returns an enzyme wrapper.
+`at(index)` returns an Enzyme wrapper.
 
 While the difference is subtle the `get` method is useful to check the rendered markup.
 
@@ -118,9 +118,9 @@ const exampleList = dom.find('.exampleList li');
 exampleList.get(0).getAttribute('class').should.equal('special');
 ```
 
-To access the state and prop objects in a React component Enzyme exposes `state([key])`, `prop([key])` and `props()`.
+To access the state and prop objects in a React component, Enzyme exposes `state([key])`, `prop([key])` and `props()`.
 
-Below the component takes a `profileId` to get a user profile. Assert the profileId is correct on the props and the expected user name set in the state.
+Below the component takes a `profileId` to get a user profile. Assert the profileId is correct on the props and the expected user name assigned in the state.
 
 ```javascript
 const dom = mount(<ExampleComponent profileId="123" />);
@@ -138,13 +138,13 @@ In React the `onChange` event needs to be fired to update the state of an input 
 ```javascript
 const dom = mount(<ExampleComponent />);
 
-const exampleList = dom.find('.exampleList .userName');
+const exampleInput = dom.find('.exampleForm .userName');
 
 dom.state('userName').should.equal('typo.doe');
 
-exampleList.simulate('change', { target: { value: 'john.doe'}});
+exampleInput.simulate('change', { target: { value: 'john.doe'}});
 
 dom.state('userName').should.equal('john.doe');
 ```
 
-Enzyme JS is a useful tool for testing React components enabling developer to build tests efficiently. I would encourage all React app development to use this library.
+Enzyme JS is a useful tool for testing React components enabling developers to build tests efficiently. I would encourage all React app development to use this library.
