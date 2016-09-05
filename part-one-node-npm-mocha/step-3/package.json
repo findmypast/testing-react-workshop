@@ -2,6 +2,7 @@
   "name": "step-2",
   "version": "0.0.1",
   "description": "Step 3 - Using jsdom",
+  "main": "./src/index",
   "scripts": {
     "test": "mocha -r should --compilers js:babel-core/register \"**/*spec.js\" --reporter spec"
   },
