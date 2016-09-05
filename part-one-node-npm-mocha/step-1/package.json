@@ -1,0 +1,6 @@
+{
+  "name": "step-1",
+  "version": "0.0.1",
+  "description": "Step 1",
+  "main": "./src/index"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "step-2",
+  "version": "0.0.1",
+  "description": "Step 2",
+  "scripts": {
+    "start": ""
+  },
+  "dependencies": {
+    "step1": "file:../step-1"
+  }
+}
