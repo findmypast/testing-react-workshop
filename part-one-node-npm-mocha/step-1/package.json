@@ -1,6 +1,6 @@
 {
   "name": "step-1",
   "version": "0.0.1",
-  "description": "Step 1",
+  "description": "Step 1 - Simple NodeJS server",
   "main": "./src/index"
 }

@@ -1,0 +1,16 @@
+{
+  "name": "step-2",
+  "version": "0.0.1",
+  "description": "Step 3 - Using jsdom",
+  "scripts": {
+    "test": "mocha -r should --compilers js:babel-core/register \"**/*spec.js\" --reporter spec"
+  },
+  "dependencies": {
+    "jquery": "^3.1.0"
+  },
+  "devDependencies": {
+    "jsdom": "^9.4.2",
+    "mocha": "^2.3.4",
+    "should": "^8.3.1"
+  }
+}
