@@ -1,0 +1,8 @@
+{
+  "name": "step-1",
+  "version": "0.0.1",
+  "description": "Step 1 - Simple NodeJS server",
+  "dependencies": {
+    "simple-math": "^0.1.2"
+  }
+}

@@ -1,5 +1,15 @@
 {
   "name": "step-1",
   "version": "0.0.1",
-  "description": "Step 1 - Simple NodeJS server"
+  "description": "Step 1 - Simple NodeJS server",
+  "main": "index.js",
+  "dependencies": {
+    "simple-math": "^0.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }

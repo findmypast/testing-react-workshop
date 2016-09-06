@@ -1,10 +1,6 @@
-var http = require('http');
-var PORT = 8080;
+var simpleMath = require('simple-math');
 
-var server = http.createServer(function(req, res) {
-  res.writeHead(200);
-  res.end('Hello node.js');
-});
-
-server.listen(PORT);
-console.log('Server started on http://localhost:' + PORT);
+module.exports = {
+  add: simpleMath.add,
+  subtract: simpleMath.subtract
+};
