@@ -2,11 +2,15 @@
   "name": "step-2",
   "version": "0.0.1",
   "description": "Step 2 - Introducing Mocha",
-  "scripts": {
-    "test": "mocha -r should \"**/*spec.js\" --reporter spec"
+  "main": "index.js",
+  "dependencies": {
+    "simple-math": "^0.1.2"
   },
   "devDependencies": {
     "mocha": "^2.3.4",
     "should": "^8.3.1"
+  },
+  "scripts": {
+    "test": "mocha -r should \"**/*spec.js\" --reporter spec"
   }
 }
